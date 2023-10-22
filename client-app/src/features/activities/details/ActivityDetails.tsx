@@ -1,15 +1,16 @@
 import React from 'react';
 import { Card, Image, Button } from 'semantic-ui-react';
-import { Activity } from '../../../app/models/activity';
+import { useStore } from '../../../app/stores/store';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-    activity: Activity;
-    cancelSelectActivity: () => void;
-    openForm: (id: string) => void;
 
-}
+export default observer(function ActivityDetails() {
+    const { activityStore } = useStore();
+    const { selectedActivity: activity, openForm, cancelSelectedActivity } = activityStore;
 
-export default function ActivityDetails({ activity, cancelSelectActivity, openForm }:Props) {
+    if (!activity) return <LoadingComponent />;
+
     return (
         // allows the card to take up the remaining columns around it.
         <Card fluid>
@@ -27,9 +28,9 @@ export default function ActivityDetails({ activity, cancelSelectActivity, openFo
             <Card.Content>
                 <Button.Group widths='2'>
                     <Button onClick={() => openForm(activity.id)} basic color ='blue' content='Edit' />
-                    <Button onClick={cancelSelectActivity} basic color ='grey' content='Cancel' />
+                    <Button onClick={cancelSelectedActivity} basic color ='grey' content='Cancel' />
                 </Button.Group>
             </Card.Content>
         </Card>
     )
-}
+})
