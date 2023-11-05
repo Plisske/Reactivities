@@ -21,6 +21,18 @@ export default class ActivityStore {
             Date.parse(a.date) - Date.parse(b.date));
     }
 
+    get groupedActivities() {
+        return Object.entries(
+            this.activitiesByDate.reduce((activities, activity) => {
+                const date = activity.date;
+                //Checks if we have a match for an activity by date, if true then spread activities and add activities onto callback function
+                // if not, create new array with that activity.
+                activities[date] = activities[date] ? [...activities[date], activity] : [activity];
+                return activities
+            }, {} as {[key: string]: Activity[]}) // parameters, starting objects.
+        )
+    }
+
     loadActivities = async () => {
         this.setLoadingInitial(true);
         try {
