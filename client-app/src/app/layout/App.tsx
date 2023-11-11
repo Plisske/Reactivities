@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { Outlet, useLocation } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import 'semantic-ui-css/semantic.min.css'
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     {/*can only return 1 element*/ }
     return (
         <Fragment>
+        <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
             {location.pathname === '/' ? <HomePage /> : (
                 <Fragment>
                     <NavBar />

@@ -1,4 +1,7 @@
-﻿namespace Domain
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Domain
 {
     public class Activity
     {

@@ -1,3 +1,4 @@
+using Application.Core;
 using Domain;
 using MediatR;
 using Persistence;
@@ -6,21 +7,24 @@ namespace Application.Activities
 {
     public class Details
     {
-        public class Query : IRequest<Activity> //fetches data only
+        public class Query : IRequest<Result<Activity>> //fetches data only
         {
             public Guid Id { get; set; } //Get the primary key (Id) from the particular post
         }
 
-        public class Handler : IRequestHandler<Query, Activity>
+        public class Handler : IRequestHandler<Query, Result<Activity>>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
             {
                 _context = context;
             }
-            public async Task<Activity> Handle(Query request, CancellationToken cancellationToken)
+            // finds the requested Id.
+            public async Task<Result<Activity>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Activities.FindAsync(request.Id);// finds the requested Id.
+                var activity =  await _context.Activities.FindAsync(request.Id);//contains an object or null
+
+                return Result<Activity>.Success(activity);
             }
         }
 
