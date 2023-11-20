@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
+
+    [AllowAnonymous]
     public class ActivitiesController : BaseApiController
     {
         // Mediator is private within the parent class (BaseApiController)
