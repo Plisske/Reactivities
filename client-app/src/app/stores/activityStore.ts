@@ -5,6 +5,8 @@ import { v4 as uuid } from 'uuid';
 import { format } from "date-fns";
 
 //where we store all of our "stores"
+//Simplest way to explain a "store" is this is 
+// where we put all of our methods relating to the object
 export default class ActivityStore {
     activityRegistry = new Map<string, Activity>();
     selectedActivity: Activity | undefined = undefined;
