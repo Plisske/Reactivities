@@ -16,7 +16,7 @@ export default class UserStore {
     }
 
     login = async (creds: UserFormValues) => {
-        const user = await agent.Account.login(creds);
+        const user = await agent.Profile.login(creds);
         store.commonStore.setToken(user.token)
         //use running action here because its the next tick from login info
         runInAction(() => this.user = user);
@@ -33,7 +33,7 @@ export default class UserStore {
     }
 
     register = async (creds: UserFormValues) => {
-        const user = await agent.Account.register(creds);
+        const user = await agent.Profile.register(creds);
         store.commonStore.setToken(user.token)
         runInAction(() => this.user = user);
         router.navigate('/activities');
@@ -42,7 +42,7 @@ export default class UserStore {
 
     getUser = async () => {
         try {
-            const user = await agent.Account.current();
+            const user = await agent.Profile.current();
             runInAction(() => this.user = user)
         } catch (error) {
             console.log(error);

@@ -9,6 +9,7 @@ namespace Application.Core
         public MappingProfiles() 
         {
             //Match properties of the former Activity with the Updated Activity
+            CreateMap<Account, Account>();
             CreateMap<Activity, Activity>();
             CreateMap<Activity, ActivityDto>()
                 .ForMember(d => d.HostUsername, o => o.MapFrom(

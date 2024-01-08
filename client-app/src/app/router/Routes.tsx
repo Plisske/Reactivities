@@ -7,16 +7,27 @@ import TestErrors from "../../features/errors/TestError";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
 import LoginForm from "../../features/users/LoginForm";
+import AccountDashboard from "../../features/accounts/dashboard/AccountDashboard";
+import AccountForm from "../../features/accounts/form/AccountForm";
+import AccountWithdraw from "../../features/accounts/form/AccountWithdraw";
+import AccountDeposit from "../../features/accounts/form/AccountDeposit";
+import AccountDetails from "../../features/accounts/details/AccountDetails";
 
 export const routes: RouteObject[] = [
     {
         path: '/',
         element: <App />,
         children: [
-            { path: 'activities', element: <ActivityDashboard />},
+            { path: 'accounts', element: <AccountDashboard /> },
+            { path: 'accounts/:id', element: <AccountDetails /> },
+            { path: 'createAccount', element: <AccountForm key='create' /> },
+            { path: 'manageaccount/:id', element: <AccountForm key='manage' /> },
+            { path: 'deposit/:id', element: <AccountDeposit /> },
+            { path: 'withdraw/:id', element: <AccountWithdraw /> },
+            { path: 'activities', element: <ActivityDashboard /> },
             { path: 'activities/:id', element: <ActivityDetails />},
             { path: 'createActivity', element: <ActivityForm key='create' />},
-            { path: 'manage/:id', element: <ActivityForm key='manage' />},
+            { path: 'manage/:id', element: <ActivityForm key='manage' /> },
             { path: 'login', element: <LoginForm />},
             { path: 'errors', element: <TestErrors />},
             { path: 'not-found', element: <NotFound /> },

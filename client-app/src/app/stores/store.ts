@@ -3,8 +3,10 @@ import ActivityStore from "./activityStore";
 import CommonStore from "./commonStore";
 import UserStore from "./userStore";
 import ModalStore from "./modalStore";
+import AccountStore from "./accountStore";
 
 interface Store {
+    accountStore: AccountStore;
     activityStore: ActivityStore;
     commonStore: CommonStore;
     userStore: UserStore;
@@ -12,6 +14,7 @@ interface Store {
 }
 
 export const store: Store = {
+    accountStore: new AccountStore(),
     activityStore: new ActivityStore(),
     commonStore: new CommonStore(),
     userStore: new UserStore(),

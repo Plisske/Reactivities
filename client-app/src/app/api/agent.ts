@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Activity } from '../models/activity';
+import { Account } from '../models/account';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
@@ -54,6 +55,7 @@ axios.interceptors.response.use(
             toast.error('unauthorized')
             break;
         case 403:
+            console.log(status)
             toast.error('forbidden')
             break;
         case 404:
@@ -84,15 +86,25 @@ const Activities = {
     delete: (id: string) => axios.delete<void>(`/activities/${id}`)
 }
 
-const Account = {
-    current: () => requests.get<User>('/account'), //returns a user object from the request. Returns a promise with a user object
-    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
-    register: (user: UserFormValues) => requests.post<User>('/account/register', user)
+const Profile = {
+    current: () => requests.get<User>('/profile'), //returns a user object from the request. Returns a promise with a user object
+    login: (user: UserFormValues) => requests.post<User>('/profile/login', user),
+    register: (user: UserFormValues) => requests.post<User>('/profile/register', user)
+}
+
+const Accounts = {
+    list: () => requests.get<Account[]>('/accounts'),
+    details: (id: string) => requests.get<Account>(`/accounts/${id}`),
+    create: (account: Account) => requests.post<void>('/accounts', account),
+    update: (account: Account) => requests.put<void>(`/accounts/${account.id}`, account),
+    delete: (id:string) => axios.delete<void>(`/accounts/${id}`)
+
 }
 
 const agent = {
     Activities,
-    Account
+    Profile,
+    Accounts
 }
 
 export default agent;

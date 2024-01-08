@@ -37,6 +37,32 @@ namespace Persistence
                     await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
 
+                var accounts = new List<Account>
+                {
+                    new Account
+                    {
+                        Title = "Checking Account 1",
+                        Date = DateTime.UtcNow.AddMonths(-2),
+                        Category = "Checking",
+                        Balance = 1000.00
+                    },
+                    new Account
+                    {
+                        Title = "Checking Account 2",
+                        Date = DateTime.UtcNow.AddMonths(-4),
+                        Category = "Checking",
+                        Balance = 400.00
+                    },
+                    new Account
+                    {
+                        Title = "Checking Account 3",
+                        Date = DateTime.UtcNow.AddMonths(-4),
+                        Category = "Checking",
+                        Balance = 800.00
+                    }
+                };
+
+                //generate the activities
                 var activities = new List<Activity>
                 {
                     new Activity
@@ -251,6 +277,7 @@ namespace Persistence
                     }
                 };
 
+                await context.Accounts.AddRangeAsync(accounts);
                 await context.Activities.AddRangeAsync(activities);
                 await context.SaveChangesAsync();
             }

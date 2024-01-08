@@ -21,6 +21,7 @@ namespace Infrastructure.Security
             _httpContextAccessor = httpContextAccessor;
         }
 
+
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IsHostRequirement requirement)
         {
             var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);

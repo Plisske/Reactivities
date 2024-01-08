@@ -10,8 +10,10 @@ namespace Persistence
         {
         }
 
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
+        //below builds the many-to-many join table.
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
